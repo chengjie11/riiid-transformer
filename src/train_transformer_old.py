@@ -31,7 +31,9 @@ TRAIN_DTYPES = {
     'prior_question_elapsed_time': np.float32,
     'prior_question_had_explanation': 'boolean'
 }
-DATA_DIR = os.path.abspath(os.path.join('.', os.pardir))
+
+HOME = os.path.abspath(os.path.join('.', os.pardir))
+# DATA_DIR = os.path.abspath(os.path.join('.', os.pardir))
 DATA_DIR = os.path.join(HOME,  'data')
 
 LAST_N = 100 # this parameter denotes how many last seen content_ids I am going to consider <aka the max_seq_len or the window size>.

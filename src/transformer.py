@@ -1,3 +1,4 @@
+import os
 from collections import Counter, deque
 from time import time
 from typing import List
@@ -25,10 +26,10 @@ LAST_N = 100
 TQDM_INT = 8
 PAD = 0
 FOLD = 1
+HOME = os.path.abspath(os.path.join('.', os.pardir))
 MODEL_DIR = f'/home/scao/Documents/kaggle-riiid-test/model/'
 N_EXERCISES = 13523 #  train_df['content_id'].unique()
-DATA_DIR = '/home/scao/Documents/kaggle-riiid-test/data/'
-DATA_TABLE = False
+DATA_DIR =  os.path.join(HOME,  'data')
 
 class Riiid(Dataset):
     '''

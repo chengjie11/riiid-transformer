@@ -20,9 +20,10 @@ from torchsummary import summary
 from sklearn.metrics import roc_auc_score
 
 
-HOME =  "/home/scao/Documents/kaggle-riiid-test/"
-MODEL_DIR = f'/home/scao/Documents/kaggle-riiid-test/model/'
-DATA_DIR = '/home/scao/Documents/kaggle-riiid-test/data/'
+HOME = os.path.abspath(os.path.join('.', os.pardir))
+# HOME =  "/home/scao/Documents/kaggle-riiid-test/"
+MODEL_DIR = os.path.join(HOME,  'model')
+DATA_DIR = os.path.join(HOME,  'data')
 
 sys.path.append(HOME)
 from utils import *
