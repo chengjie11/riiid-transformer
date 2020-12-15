@@ -22,17 +22,19 @@ from sklearn.metrics import roc_auc_score
 
 HOME = os.path.abspath(os.path.join('.', os.pardir))
 # HOME =  "/home/scao/Documents/kaggle-riiid-test/"
-MODEL_DIR = os.path.join(HOME,  'model')
-DATA_DIR = os.path.join(HOME,  'data')
+MODEL_DIR = os.path.join(HOME,  'model/')
+DATA_DIR = os.path.join(HOME,  'data/')
 
 sys.path.append(HOME)
 from utils import *
+get_system()
 from transformer import *
 # %%
 '''
 To-do:
 - Fix the same user_id prediction problem
 - Check how the predicted probability relates to the original target in val set
+- Add user when doing inference
 '''
 TRAIN_DTYPES = {
     # 'row_id': np.uint32,
@@ -58,9 +60,9 @@ TEST_DTYPES = {
     'prior_question_had_explanation': 'boolean'
 }
 
-LAST_N = 100 # this parameter denotes how many last seen content_ids I am going to consider <aka the max_seq_len or the window size>.
+LAST_N = 150 # this parameter denotes how many last seen content_ids I am going to consider <aka the max_seq_len or the window size>.
 TAIL_N = 100 # used for validation set per user_id
-FILLNA_VAL = 100 # fillers for the values (a unique value)
+FILLNA_VAL = 140_000 # fillers for the values (a unique value)
 TQDM_INT = 15 # tqdm update interval
 PAD = 0
 BATCH_SIZE = 512
@@ -79,12 +81,12 @@ TRAIN = False
 # %% Preparing train and validation set
 start = time()
 if DEBUG: 
-    train_df = pd.read_csv(DATA_DIR+'train.csv', 
+    train_df = pd.read_csv(os.path.join(DATA_DIR,'train.csv'), 
                         nrows=NROWS_TRAIN, 
                         dtype=TRAIN_DTYPES, 
                         usecols=TRAIN_DTYPES.keys())
 else:
-    train_df = pd.read_csv(DATA_DIR+'train.csv', 
+    train_df = pd.read_csv(os.path.join(DATA_DIR,'train.csv'), 
                     dtype=TRAIN_DTYPES, 
                     usecols=TRAIN_DTYPES.keys())
 print(f"Readding train.csv in {time()-start} seconds\n\n")
